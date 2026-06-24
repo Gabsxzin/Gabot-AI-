@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>GABOT IA</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="{{ url_for('static', filename='javascrip.js') }}"></script>
+</head>
+<body>
+
+    <div class="container">
+        <h1>𝓖𝓐𝓑𝓞𝓣 𝓘𝓐 🎆</h1>
+
+        <input type="text" id="mensagem" placeholder="Digite uma mensagem">
+        <button onclick="enviar()">Enviar</button>
+
+        <div id="resposta"></div>
+    </div>
+
+    <script>
+async function enviar() {
+
+    let mensagem = document.getElementById("mensagem").value;
+
+    if (mensagem.trim() === "") return;
+
+    let resposta = await fetch("/chat", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            mensagem: mensagem
+        })
+    });
+
+    let dados = await resposta.json();
+
+    document.getElementById("resposta").innerHTML +=
+        `<p><b>🎆 IA:</b> ${dados.resposta}</p>`;
+
+    document.getElementById("mensagem").value = "";
+    document.getElementById("mensagem").focus();
+}
+
+document.getElementById("mensagem").addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
+        event.preventDefault();
+        enviar();
+    }
+});
+</script>
+
+</body>
+
+</html>
