@@ -1,4 +1,4 @@
-GABOT IA
+
 <img width="647" height="495" alt="image" src="https://github.com/user-attachments/assets/2613d9e4-8b48-4ac0-8815-5ca18e6ca023" />
 
 <div align="center">
